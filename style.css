@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+}
+
+main {
+    padding: 10px 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rightNavBtn {
+    padding: 5px 10px;
+    background-color: #181818;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+.sections {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.to-doSec,
+.inProgressSec,
+.doneSec {
+    padding: 8px 6px;
+    width: 33%;
+    min-height: 88vh;
+    background-color: #181818;
+    border-radius: 5px;
+}
+
+.to-doInfo,
+.inProgressInfo,
+.doneInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.fTo-doTask,
+.fInProgressTask,
+.fDoneTask {
+    background-color: #292929;
+    margin: 8px 0;
+    padding: 8px 7px;
+    border-radius: 5px;
+}
+
+.fTo-doTask button,
+.fInProgressTask button,
+.fDoneTask button {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 6px;
+    margin: 0px 5px 0px 87%;
+}
