@@ -1,9 +1,11 @@
 console.log("script start");
 const mainElement = document.querySelector('main')
+const sections = document.querySelector('.sections')
 const AddNewTaskBtn = document.querySelector('.rightNavBtn')
 const AddTaskPopUp = document.querySelector('.addTaskPopUp')
 const newTaskSubmitBtn = document.querySelector('#newTaskSubmitBtn')
 const toDoSec = document.querySelector('.to-doSec')
+let deleteBtns = sections.querySelectorAll("button")
 
 function AddNewTask(){
     AddNewTaskBtn.addEventListener("click",e=>{
@@ -24,8 +26,15 @@ function AddNewTask(){
                     <button>Delete</button>
         `
         toDoSec.appendChild(divElement)
+            
+        //Delete Task
+        let deleteBtns = sections.querySelectorAll("button")
+        deleteBtns.forEach(e=>{
+            e.addEventListener("click",()=>{
+                e.parentNode.remove()
+            })
+        })
     })
-
 }
 
 function main(){
