@@ -51,6 +51,12 @@ nav {
     border-radius: 5px;
 }
 
+.hover-over{
+    border: 2px dashed white;
+    scale: 1.05;
+    transition: ease-in-out 0.2s;
+}
+
 .to-doInfo,
 .inProgressInfo,
 .doneInfo {
@@ -67,6 +73,10 @@ nav {
     margin: 8px 0;
     padding: 8px 7px;
     border-radius: 5px;
+}
+
+.task{
+    cursor: grabbing;
 }
 
 .fTo-doTask button,
@@ -93,7 +103,11 @@ nav {
     background-color: black;
     width: 20%;
     height: 35%;
-    opacity: 0;
+    opacity: 1;
+}
+
+.fAddTaskPopUp{
+    display: none;
 }
 
 .addTaskPopUp input[type="text"]{
