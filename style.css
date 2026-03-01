@@ -15,6 +15,7 @@ body {
 
 main {
     padding: 10px 20px;
+    position: absolute;
 }
 
 nav {
@@ -29,6 +30,7 @@ nav {
     color: white;
     border: none;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .sections {
@@ -75,4 +77,40 @@ nav {
     padding: 3px 5px;
     border-radius: 6px;
     margin: 0px 5px 0px 87%;
+    cursor: pointer;
 }
+
+.addTaskPopUp{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    top: 30%;
+    left: 40%;
+    background-color: black;
+    width: 20%;
+    height: 35%;
+    opacity: 0;
+}
+
+.addTaskPopUp input[type="text"]{
+    color: white;
+    margin: 8px 0;
+    padding: 8px 7px;
+    background-color: #292929;
+    border: none;
+    border-radius: 5px;
+}
+
+.addTaskPopUp input[type="submit"]{
+    margin: 8px 0;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: #292929;
+    color: white;
+    cursor: pointer;
+}
+
