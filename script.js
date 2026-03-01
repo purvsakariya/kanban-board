@@ -1,4 +1,4 @@
-console.log("script start");
+let taskData = {};
 const mainElement = document.querySelector('main')
 const sections = document.querySelector('.sections')
 const AddNewTaskBtn = document.querySelector('.rightNavBtn')
@@ -10,12 +10,44 @@ const doneSec = document.querySelector('.doneSec')
 let deleteBtns = sections.querySelectorAll("button")
 let tasks = document.getElementsByClassName('task')
 
+if (localStorage.getItem("Tasks")) {
+    let data = JSON.parse(localStorage.getItem("Tasks"))
+    for (const col in data) {
+        let column = document.querySelector(`#${col}`)
+
+        data[col].forEach(task => {
+            let divElement = document.createElement("div")
+            divElement.classList.add('fTo-doTask')
+            divElement.classList.add('task')
+            divElement.draggable = true
+            divElement.innerHTML = `
+                    <h3>${task.title}</h3>
+                    <p>${task.desc}</p>
+                    <button>Delete</button>
+        `
+            column.appendChild(divElement)
+        })
+    }
+    deleteBtns = sections.querySelectorAll("button")
+    deleteBtns.forEach(e => {
+        e.addEventListener("click", () => {
+            e.parentNode.remove()
+            taskCount();
+        })
+    })
+}
+
 function AddNewTask() {
     AddNewTaskBtn.addEventListener("click", e => {
         console.log("clicked");
         AddTaskPopUp.classList.add('addTaskPopUp')
         AddTaskPopUp.classList.remove('fAddTaskPopUp')
         mainElement.style.opacity = "0.2"
+    })
+    sections.addEventListener("click", () => {
+        AddTaskPopUp.classList.remove('addTaskPopUp')
+        AddTaskPopUp.classList.add('fAddTaskPopUp')
+        mainElement.style.opacity = "1"
     })
     newTaskSubmitBtn.addEventListener("click", e => {
         AddTaskPopUp.classList.remove('addTaskPopUp')
@@ -37,7 +69,7 @@ function AddNewTask() {
         sInputValue = null;
 
         //Delete Task
-        let deleteBtns = sections.querySelectorAll("button")
+        deleteBtns = sections.querySelectorAll("button")
         deleteBtns.forEach(e => {
             e.addEventListener("click", () => {
                 e.parentNode.remove()
@@ -49,12 +81,10 @@ function AddNewTask() {
 }
 
 function drag_drop() {
-    let tasks = document.querySelectorAll('.task')
     let selectTask = null;
     for (const task of tasks) {
         task.addEventListener("drag", e => {
             selectTask = e.target;
-            taskCount();
         })
     }
 
@@ -73,8 +103,8 @@ function drag_drop() {
         section.addEventListener("drop", e => {
             section.appendChild(selectTask)
             section.classList.remove('hover-over')
-            taskCount()
             selectTask = null;
+            taskCount()
         })
     }
     drag_dropAffect(toDoSec)
@@ -83,27 +113,23 @@ function drag_drop() {
 }
 
 function taskCount() {
-    let tasktodoSec = toDoSec.querySelectorAll('.task')
-    let taskInprSec = inProgressSec.querySelectorAll('.task')
-    let taskdoneSec = doneSec.querySelectorAll('.task')
-    let taskCountTodoSec = toDoSec.querySelector('.to-doTC')
-    let taskCountInPrSec = inProgressSec.querySelector('.inProgressTC')
-    let taskCountDoneSec = doneSec.querySelector('.doneTC')
-    for (let i = 0; i <= tasktodoSec.length; i++) {
-        taskCountTodoSec.innerHTML = i
-    }
-    for (let i = 0; i <= taskInprSec.length; i++) {
-        taskCountInPrSec.innerHTML = i
-    }
-    for (let i = 0; i <= taskdoneSec.length; i++) {
-        taskCountDoneSec.innerHTML = i
-    }
+    [toDoSec, inProgressSec, doneSec].forEach(col => {
+        const tasks = col.querySelectorAll('.task')
+        const count = col.querySelector(".count")
+
+        taskData[col.id] = Array.from(tasks).map(t => {
+            return {
+                title: t.firstElementChild.innerText,
+                desc: t.firstElementChild.nextElementSibling.innerText,
+            }
+        })
+
+        localStorage.setItem("Tasks", JSON.stringify(taskData))
+
+        count.innerHTML = tasks.length
+    })
 }
 
-function main() {
-    AddNewTask();
-    drag_drop();
-    taskCount();
-}
-
-main()
+AddNewTask();
+drag_drop();
+taskCount();
