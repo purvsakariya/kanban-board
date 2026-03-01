@@ -28,14 +28,15 @@ if (localStorage.getItem("Tasks")) {
             column.appendChild(divElement)
         })
     }
-    deleteBtns = sections.querySelectorAll("button")
-    deleteBtns.forEach(e => {
-        e.addEventListener("click", () => {
-            e.parentNode.remove()
-            taskCount();
-        })
-    })
 }
+
+//Delete Task
+sections.addEventListener("click",(e)=>{
+    if(e.target.tagName === "BUTTON"){
+        e.target.parentNode.remove()
+        taskCount()
+    }
+})
 
 function AddNewTask() {
     AddNewTaskBtn.addEventListener("click", e => {
@@ -53,28 +54,20 @@ function AddNewTask() {
         AddTaskPopUp.classList.remove('addTaskPopUp')
         AddTaskPopUp.classList.add('fAddTaskPopUp')
         mainElement.style.opacity = "1"
-        let fInputValue = document.querySelector('#fnewTaskTitle').value
-        let sInputValue = document.querySelector('#snewTaskTitle').value
+        let taskTatle = document.querySelector('#fnewTaskTitle').value
+        let taskDesc = document.querySelector('#snewTaskTitle').value
         let divElement = document.createElement("div")
         divElement.classList.add('fTo-doTask')
         divElement.classList.add('task')
         divElement.draggable = true
         divElement.innerHTML = `
-                    <h3>${fInputValue}</h3>
-                    <p>${sInputValue}</p>
+                    <h3>${taskTatle}</h3>
+                    <p>${taskDesc}</p>
                     <button>Delete</button>
         `
         toDoSec.appendChild(divElement)
-        fInputValue = null;
-        sInputValue = null;
-
-        //Delete Task
-        deleteBtns = sections.querySelectorAll("button")
-        deleteBtns.forEach(e => {
-            e.addEventListener("click", () => {
-                e.parentNode.remove()
-            })
-        })
+        document.querySelector('#fnewTaskTitle').value = "";
+        document.querySelector('#snewTaskTitle').value = "";
         drag_drop()
         taskCount();
     })
@@ -132,4 +125,4 @@ function taskCount() {
 
 AddNewTask();
 drag_drop();
-taskCount();
+taskCount()
