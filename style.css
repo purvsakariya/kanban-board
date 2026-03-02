@@ -14,6 +14,7 @@ body {
 }
 
 main {
+    z-index: 1;
     padding: 10px 20px;
     position: absolute;
 }
@@ -100,10 +101,10 @@ nav {
     border-radius: 10px;
     top: 30%;
     left: 40%;
-    background-color: black;
+    background-color: #181818;
     width: 20%;
     height: 35%;
-    opacity: 1;
+    z-index: 3;
 }
 
 .fAddTaskPopUp{
@@ -129,3 +130,10 @@ nav {
     cursor: pointer;
 }
 
+.bgPopUp{
+    position:relative;
+    bottom: 34%;
+    height: 99%;
+    background-color: black;
+    z-index: 0;
+}

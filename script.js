@@ -9,6 +9,7 @@ const inProgressSec = document.querySelector('.inProgressSec')
 const doneSec = document.querySelector('.doneSec')
 let deleteBtns = sections.querySelectorAll("button")
 let tasks = document.getElementsByClassName('task')
+const bgpopUp = document.querySelector('.bgPopUp')
 
 if (localStorage.getItem("Tasks")) {
     let data = JSON.parse(localStorage.getItem("Tasks"))
@@ -43,17 +44,17 @@ function AddNewTask() {
         console.log("clicked");
         AddTaskPopUp.classList.add('addTaskPopUp')
         AddTaskPopUp.classList.remove('fAddTaskPopUp')
-        mainElement.style.opacity = "0.2"
+        bgpopUp.style.zIndex = "2"
     })
-    sections.addEventListener("click", () => {
+    bgpopUp.addEventListener("click", () => {
         AddTaskPopUp.classList.remove('addTaskPopUp')
         AddTaskPopUp.classList.add('fAddTaskPopUp')
-        mainElement.style.opacity = "1"
+        bgpopUp.style.zIndex = "0"
     })
     newTaskSubmitBtn.addEventListener("click", e => {
         AddTaskPopUp.classList.remove('addTaskPopUp')
         AddTaskPopUp.classList.add('fAddTaskPopUp')
-        mainElement.style.opacity = "1"
+        bgpopUp.style.zIndex = "0"
         let taskTatle = document.querySelector('#fnewTaskTitle').value
         let taskDesc = document.querySelector('#snewTaskTitle').value
         let divElement = document.createElement("div")
